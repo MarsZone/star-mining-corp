@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>星际采矿公司 - Star Mining Corp</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- PixiJS画布容器 -->
+    <div id="game-canvas-container"></div>
+    
+    <!-- HTML UI覆盖层 -->
+    <div id="ui-overlay">
+        <!-- 顶部资源栏 -->
+        <header id="resource-bar">
+            <div class="resource-item" id="res-crystals">
+                <span class="res-icon">💎</span>
+                <span class="res-name">能量晶体</span>
+                <span class="res-value">0</span>
+                <span class="res-rate">(+0/s)</span>
+            </div>
+            <div class="resource-item hidden" id="res-rareOre">
+                <span class="res-icon">⛏️</span>
+                <span class="res-name">稀有矿石</span>
+                <span class="res-value">0</span>
+                <span class="res-rate">(+0/s)</span>
+            </div>
+            <div class="resource-item hidden" id="res-starCore">
+                <span class="res-icon">⭐</span>
+                <span class="res-name">星核碎片</span>
+                <span class="res-value">0</span>
+                <span class="res-rate">(+0/s)</span>
+            </div>
+            <div class="resource-item hidden" id="res-darkMatter">
+                <span class="res-icon">🌌</span>
+                <span class="res-name">暗物质</span>
+                <span class="res-value">0</span>
+                <span class="res-rate">(+0/s)</span>
+            </div>
+        </header>
+
+        <!-- 底部导航 -->
+        <nav id="bottom-nav">
+            <button class="nav-btn active" data-panel="main">
+                <span class="nav-icon">🏭</span>
+                <span class="nav-text">主基地</span>
+            </button>
+            <button class="nav-btn" data-panel="buildings">
+                <span class="nav-icon">🏗️</span>
+                <span class="nav-text">设备</span>
+            </button>
+            <button class="nav-btn" data-panel="tech">
+                <span class="nav-icon">🔬</span>
+                <span class="nav-text">科技</span>
+            </button>
+            <button class="nav-btn" data-panel="zones">
+                <span class="nav-icon">🌍</span>
+                <span class="nav-text">星域</span>
+            </button>
+            <button class="nav-btn" data-panel="achievements">
+                <span class="nav-icon">🏆</span>
+                <span class="nav-text">成就</span>
+            </button>
+            <button class="nav-btn" data-panel="settings">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">设置</span>
+            </button>
+        </nav>
+
+        <!-- 面板容器 -->
+        <div id="panels-container">
+            <!-- 设备面板 -->
+            <div class="panel hidden" id="buildings-panel">
+                <div class="panel-header">
+                    <h2>采矿设备</h2>
+                    <button class="close-btn">×</button>
+                </div>
+                <div class="panel-content" id="buildings-list">
+                    <!-- 动态生成 -->
+                </div>
+            </div>
+
+            <!-- 科技面板 -->
+            <div class="panel hidden" id="tech-panel">
+                <div class="panel-header">
+                    <h2>科技研发中心</h2>
+                    <button class="close-btn">×</button>
+                </div>
+                <div class="panel-content" id="tech-list">
+                    <!-- 动态生成 -->
+                </div>
+            </div>
+
+            <!-- 星域面板 -->
+            <div class="panel hidden" id="zones-panel">
+                <div class="panel-header">
+                    <h2>星际探索</h2>
+                    <button class="close-btn">×</button>
+                </div>
+                <div class="panel-content" id="zones-list">
+                    <!-- 动态生成 -->
+                </div>
+            </div>
+
+            <!-- 成就面板 -->
+            <div class="panel hidden" id="achievements-panel">
+                <div class="panel-header">
+                    <h2>成就系统</h2>
+                    <button class="close-btn">×</button>
+                </div>
+                <div class="panel-content" id="achievements-list">
+                    <!-- 动态生成 -->
+                </div>
+            </div>
+
+            <!-- 设置面板 -->
+            <div class="panel hidden" id="settings-panel">
+                <div class="panel-header">
+                    <h2>游戏设置</h2>
+                    <button class="close-btn">×</button>
+                </div>
+                <div class="panel-content">
+                    <div class="setting-item">
+                        <label>自动保存</label>
+                        <input type="checkbox" id="autosave" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label>显示粒子效果</label>
+                        <input type="checkbox" id="particles-enabled" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label>音效</label>
+                        <input type="checkbox" id="sound-enabled">
+                    </div>
+                    <div class="setting-buttons">
+                        <button id="btn-save">💾 手动保存</button>
+                        <button id="btn-export">📤 导出存档</button>
+                        <button id="btn-import">📥 导入存档</button>
+                    </div>
+                    
+                    <!-- 调试功能区域 -->
+                    <div id="debug-section" style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #333; display: none;">
+                        <h3 style="color: #ff6b6b; margin-bottom: 15px;">🐛 调试功能</h3>
+                        <div class="setting-item">
+                            <label>解锁所有星域</label>
+                            <input type="checkbox" id="debug-unlock-zones">
+                        </div>
+                        <div class="setting-item">
+                            <label>解锁所有科技</label>
+                            <input type="checkbox" id="debug-unlock-tech">
+                        </div>
+                        <div class="setting-item">
+                            <label>点击倍率 x100</label>
+                            <input type="checkbox" id="debug-click-boost">
+                        </div>
+                        <div class="setting-item">
+                            <label>产出倍率 x100</label>
+                            <input type="checkbox" id="debug-production-boost">
+                        </div>
+                        <div class="setting-buttons">
+                            <button id="btn-debug-apply">✅ 应用调试设置</button>
+                            <button id="btn-debug-reset" class="danger">🔄 重置游戏</button>
+                        </div>
+                        <p style="color: #888; font-size: 12px; margin-top: 10px;">
+                            提示：点击"应用调试设置"立即生效，点击"重置游戏"清空所有数据
+                        </p>
+                        
+                        <!-- 存储数据可视化 -->
+                        <div id="storage-debug" style="margin-top: 20px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px; font-family: monospace; font-size: 11px; max-height: 200px; overflow-y: auto;">
+                            <h4 style="color: #00d4ff; margin-bottom: 10px;">📊 存储数据</h4>
+                            <div id="storage-content">加载中...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 事件通知 -->
+        <div id="event-toast" class="hidden">
+            <div class="toast-content">
+                <h3 id="event-title"></h3>
+                <p id="event-desc"></p>
+            </div>
+        </div>
+
+        <!-- 统计信息 -->
+        <div id="stats-bar">
+            <span>点击收益: <strong id="click-power">1</strong></span>
+            <span>总产出: <strong id="total-rate">0</strong>/s</span>
+            <span>连击: <strong id="combo-count">0</strong></span>
+        </div>
+    </div>
+
+    <!-- PixiJS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>
+    
+    <!-- 游戏脚本 -->
+    <script src="js/config/game.js"></script>
+    <script src="js/config/buildings.js"></script>
+    <script src="js/config/tech.js"></script>
+    <script src="js/config/zones.js"></script>
+    <script src="js/config/achievements.js"></script>
+    <script src="js/utils/formatter.js"></script>
+    <script src="js/utils/particles.js"></script>
+    <script src="js/utils/animation.js"></script>
+    <script src="js/systems/save.js"></script>
+    <script src="js/systems/resources.js"></script>
+    <script src="js/systems/buildings.js"></script>
+    <script src="js/systems/tech.js"></script>
+    <script src="js/systems/events.js"></script>
+    <script src="js/systems/achievements.js"></script>
+    <script src="js/renderers/starfield.js"></script>
+    <script src="js/renderers/asteroid.js"></script>
+    <script src="js/renderers/miningcore.js"></script>
+    <script src="js/renderers/effects.js"></script>
+    <script src="js/ui/panels.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
