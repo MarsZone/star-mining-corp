@@ -1,7 +1,7 @@
 // 游戏全局配置
 const GameConfig = {
     // 游戏版本
-    version: '1.0.4',
+    version: '1.0.5',
     
     // 游戏循环频率 (每秒tick数)
     ticksPerSecond: 10,
@@ -36,15 +36,18 @@ const GameConfig = {
     
     // 调试配置
     debug: {
-        // 是否显示调试功能
+        // 是否显示调试功能（默认关闭，需输入密码开启）
         enabled: false,
-        
+
+        // 调试密码
+        password: 'God',
+
         // 是否解锁所有星域
         unlockAllZones: false,
-        
+
         // 是否解锁所有科技
         unlockAllTech: false,
-        
+
         // 初始资源（调试用）
         startingResources: {
             crystals: 0,
@@ -52,10 +55,10 @@ const GameConfig = {
             starCore: 0,
             darkMatter: 0
         },
-        
+
         // 点击倍率（调试用，1为正常）
         clickMultiplier: 1,
-        
+
         // 产出倍率（调试用，1为正常）
         productionMultiplier: 1
     }
