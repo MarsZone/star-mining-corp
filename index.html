@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>星际采矿公司 - Star Mining Corp</title>
+    <title data-i18n="gameTitle">星际采矿公司 - Star Mining Corp</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,25 +16,25 @@
         <header id="resource-bar">
             <div class="resource-item" id="res-crystals">
                 <span class="res-icon">💎</span>
-                <span class="res-name">能量晶体</span>
+                <span class="res-name" data-i18n="resources.crystals">能量晶体</span>
                 <span class="res-value">0</span>
                 <span class="res-rate">(+0/s)</span>
             </div>
             <div class="resource-item hidden" id="res-rareOre">
                 <span class="res-icon">⛏️</span>
-                <span class="res-name">稀有矿石</span>
+                <span class="res-name" data-i18n="resources.rareOre">稀有矿石</span>
                 <span class="res-value">0</span>
                 <span class="res-rate">(+0/s)</span>
             </div>
             <div class="resource-item hidden" id="res-starCore">
                 <span class="res-icon">⭐</span>
-                <span class="res-name">星核碎片</span>
+                <span class="res-name" data-i18n="resources.starCore">星核碎片</span>
                 <span class="res-value">0</span>
                 <span class="res-rate">(+0/s)</span>
             </div>
             <div class="resource-item hidden" id="res-darkMatter">
                 <span class="res-icon">🌌</span>
-                <span class="res-name">暗物质</span>
+                <span class="res-name" data-i18n="resources.darkMatter">暗物质</span>
                 <span class="res-value">0</span>
                 <span class="res-rate">(+0/s)</span>
             </div>
@@ -44,27 +44,27 @@
         <nav id="bottom-nav">
             <button class="nav-btn active" data-panel="main">
                 <span class="nav-icon">🏭</span>
-                <span class="nav-text">主基地</span>
+                <span class="nav-text" data-i18n="nav.base">主基地</span>
             </button>
             <button class="nav-btn" data-panel="buildings">
                 <span class="nav-icon">🏗️</span>
-                <span class="nav-text">设备</span>
+                <span class="nav-text" data-i18n="nav.buildings">设备</span>
             </button>
             <button class="nav-btn" data-panel="tech">
                 <span class="nav-icon">🔬</span>
-                <span class="nav-text">科技</span>
+                <span class="nav-text" data-i18n="nav.tech">科技</span>
             </button>
             <button class="nav-btn" data-panel="zones">
                 <span class="nav-icon">🌍</span>
-                <span class="nav-text">星域</span>
+                <span class="nav-text" data-i18n="nav.zones">星域</span>
             </button>
             <button class="nav-btn" data-panel="achievements">
                 <span class="nav-icon">🏆</span>
-                <span class="nav-text">成就</span>
+                <span class="nav-text" data-i18n="nav.achievements">成就</span>
             </button>
             <button class="nav-btn" data-panel="settings">
                 <span class="nav-icon">⚙️</span>
-                <span class="nav-text">设置</span>
+                <span class="nav-text" data-i18n="nav.settings">设置</span>
             </button>
         </nav>
 
@@ -73,7 +73,7 @@
             <!-- 设备面板 -->
             <div class="panel hidden" id="buildings-panel">
                 <div class="panel-header">
-                    <h2>采矿设备</h2>
+                    <h2 data-i18n="panels.buildings">采矿设备</h2>
                     <button class="close-btn">×</button>
                 </div>
                 <div class="panel-content" id="buildings-list">
@@ -84,7 +84,7 @@
             <!-- 科技面板 -->
             <div class="panel hidden" id="tech-panel">
                 <div class="panel-header">
-                    <h2>科技研发中心</h2>
+                    <h2 data-i18n="panels.tech">科技研发中心</h2>
                     <button class="close-btn">×</button>
                 </div>
                 <div class="panel-content" id="tech-list">
@@ -95,7 +95,7 @@
             <!-- 星域面板 -->
             <div class="panel hidden" id="zones-panel">
                 <div class="panel-header">
-                    <h2>星际探索</h2>
+                    <h2 data-i18n="panels.zones">星际探索</h2>
                     <button class="close-btn">×</button>
                 </div>
                 <div class="panel-content" id="zones-list">
@@ -106,7 +106,7 @@
             <!-- 成就面板 -->
             <div class="panel hidden" id="achievements-panel">
                 <div class="panel-header">
-                    <h2>成就系统</h2>
+                    <h2 data-i18n="panels.achievements">成就系统</h2>
                     <button class="close-btn">×</button>
                 </div>
                 <div class="panel-content" id="achievements-list">
@@ -117,38 +117,38 @@
             <!-- 设置面板 -->
             <div class="panel hidden" id="settings-panel">
                 <div class="panel-header">
-                    <h2>游戏设置</h2>
+                    <h2 data-i18n="panels.settings">游戏设置</h2>
                     <button class="close-btn">×</button>
                 </div>
                 <div class="panel-content">
                     <div class="setting-item">
-                        <label>自动保存</label>
+                        <label data-i18n="settings.autoSave">自动保存</label>
                         <input type="checkbox" id="autosave" checked>
                     </div>
                     <div class="setting-item">
-                        <label>显示粒子效果</label>
+                        <label data-i18n="settings.particles">显示粒子效果</label>
                         <input type="checkbox" id="particles-enabled" checked>
                     </div>
                     <div class="setting-item">
-                        <label>音效</label>
+                        <label data-i18n="settings.sound">音效</label>
                         <input type="checkbox" id="sound-enabled">
                     </div>
                     <div class="setting-item">
-                        <label>语言 / Language</label>
+                        <label data-i18n="settings.language">语言 / Language</label>
                         <select id="language-select" style="background: #1a1a2e; color: #fff; border: 1px solid #333; padding: 5px 10px; border-radius: 4px;">
                             <option value="zh">🇨🇳 中文</option>
                             <option value="en">🇺🇸 English</option>
                         </select>
                     </div>
                     <div class="setting-buttons">
-                        <button id="btn-save">💾 手动保存</button>
-                        <button id="btn-export">📤 导出存档</button>
-                        <button id="btn-import">📥 导入存档</button>
+                        <button id="btn-save" data-i18n="settings.manualSave">💾 手动保存</button>
+                        <button id="btn-export" data-i18n="settings.export">📤 导出存档</button>
+                        <button id="btn-import" data-i18n="settings.import">📥 导入存档</button>
                     </div>
                     
                     <!-- 版本信息 -->
                     <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #333; text-align: center; color: #666; font-size: 12px;">
-                        版本: <span id="game-version">1.0.0</span>
+                        <span data-i18n="settings.version">版本</span>: <span id="game-version">1.0.0</span>
                     </div>
                     
                     <!-- 调试功能区域 -->
@@ -198,9 +198,9 @@
 
         <!-- 统计信息 -->
         <div id="stats-bar">
-            <span>点击收益: <strong id="click-power">1</strong></span>
-            <span>总产出: <strong id="total-rate">0</strong>/s</span>
-            <span>连击: <strong id="combo-count">0</strong></span>
+            <span><span data-i18n="stats.clickPower">点击收益</span>: <strong id="click-power">1</strong></span>
+            <span><span data-i18n="stats.totalRate">总产出</span>: <strong id="total-rate">0</strong>/s</span>
+            <span><span data-i18n="stats.combo">连击</span>: <strong id="combo-count">0</strong></span>
         </div>
     </div>
 
