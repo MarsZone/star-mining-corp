@@ -125,6 +125,83 @@ button, .building-item, .tech-item, .zone-item, .achievement-item {
     font-size: 12px;
 }
 
+/* 紧凑模式资源栏 */
+#resource-bar.compact {
+    gap: 8px;
+    padding: 6px 15px;
+}
+
+.resource-item.compact {
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    min-width: auto;
+    position: relative;
+}
+
+.resource-item.compact .res-icon {
+    font-size: 16px;
+}
+
+.resource-item.compact .res-value {
+    font-size: 14px;
+}
+
+.resource-item.compact .res-rate {
+    display: none;
+}
+
+.resource-item.compact .res-name {
+    display: none;
+}
+
+/* 资源项悬停/点击时展开显示详情 */
+.resource-item.compact.expanded .res-tooltip {
+    display: block;
+}
+
+.resource-item.compact .res-tooltip {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 50, 100, 0.95);
+    border: 1px solid #00d4ff;
+    border-radius: 8px;
+    padding: 8px 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    margin-top: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.resource-item.compact .res-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #00d4ff;
+}
+
+.tooltip-name {
+    color: #88ccff;
+    font-weight: bold;
+    font-size: 12px;
+    display: block;
+}
+
+.tooltip-rate {
+    color: #00ff88;
+    font-size: 11px;
+    display: block;
+    margin-top: 2px;
+}
+
 /* 统计信息栏 */
 #stats-bar {
     position: fixed;
@@ -513,6 +590,16 @@ button, .building-item, .tech-item, .zone-item, .achievement-item {
     color: #00ff88;
 }
 
+.zone-unlock-hint {
+    font-size: 11px;
+    color: #ffaa44;
+    margin-top: 4px;
+    padding: 4px 8px;
+    background: rgba(255, 170, 68, 0.1);
+    border-radius: 4px;
+    display: inline-block;
+}
+
 /* 成就列表项 */
 .achievement-item {
     display: flex;
@@ -560,6 +647,20 @@ button, .building-item, .tech-item, .zone-item, .achievement-item {
 .achievement-reward {
     font-size: 11px;
     color: #00ff88;
+}
+
+.achievement-group-header {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background: rgba(0, 50, 100, 0.3);
+    border-radius: 8px;
+    border-left: 4px solid;
+}
+
+.achievement-time {
+    font-style: italic;
 }
 
 /* 设置项 */
@@ -729,7 +830,7 @@ button, .building-item, .tech-item, .zone-item, .achievement-item {
     .achievement-item {
         flex-wrap: wrap;
     }
-    
+
     .building-info,
     .tech-info,
     .zone-info,
@@ -737,5 +838,239 @@ button, .building-item, .tech-item, .zone-item, .achievement-item {
         width: 100%;
         order: 3;
         margin-top: 8px;
+    }
+}
+
+/* ==================== 市场面板样式 ==================== */
+
+/* 市场事件通知 */
+.market-event {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, rgba(150, 50, 0, 0.4) 0%, rgba(100, 30, 0, 0.4) 100%);
+    border: 2px solid #ff6600;
+    border-radius: 12px;
+    animation: eventPulse 2s ease-in-out infinite;
+}
+
+.market-event.hidden {
+    display: none;
+}
+
+@keyframes eventPulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 102, 0, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(255, 102, 0, 0.6); }
+}
+
+.event-icon {
+    font-size: 32px;
+}
+
+.event-info {
+    flex: 1;
+}
+
+.event-name {
+    font-weight: bold;
+    color: #ff8800;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.event-desc {
+    font-size: 12px;
+    color: #ffaa66;
+    margin-bottom: 4px;
+}
+
+.event-timer {
+    font-size: 11px;
+    color: #ff6644;
+}
+
+/* 市场价格列表 */
+.market-prices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.market-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 15px;
+    background: rgba(0, 50, 100, 0.3);
+    border: 1px solid rgba(0, 150, 200, 0.3);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.market-item:hover {
+    background: rgba(0, 80, 130, 0.4);
+    border-color: rgba(0, 200, 255, 0.5);
+}
+
+/* 第一行：资源信息 */
+.market-row-1 {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 第二行：出售操作 */
+.market-row-2 {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0, 150, 200, 0.2);
+}
+
+.market-resource {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.market-icon {
+    font-size: 24px;
+}
+
+.market-name {
+    font-weight: bold;
+    color: #fff;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.market-price-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.market-current-price {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffd700;
+    white-space: nowrap;
+}
+
+.price-change {
+    font-size: 11px;
+    margin-left: 6px;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.price-change.up {
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.2);
+}
+
+.price-change.down {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.2);
+}
+
+.market-trend {
+    font-size: 11px;
+    color: #88ccff;
+}
+
+.market-owned {
+    font-size: 12px;
+    color: #aaa;
+    text-align: right;
+    min-width: 80px;
+}
+
+.market-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.market-sell-btn {
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #00aa66 0%, #008844 100%);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.market-sell-btn:hover:not(.disabled) {
+    background: linear-gradient(135deg, #00cc77 0%, #00aa55 100%);
+    transform: scale(1.05);
+}
+
+.market-sell-btn.disabled {
+    background: linear-gradient(135deg, #444 0%, #333 100%);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* 价格趋势图 */
+.market-chart {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    height: 150px;
+}
+
+.market-chart canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* 响应式市场面板 */
+@media (max-width: 768px) {
+    .market-item {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .market-row-1 {
+        grid-template-columns: auto 1fr auto;
+        gap: 8px;
+    }
+
+    .market-name {
+        font-size: 13px;
+    }
+
+    .market-current-price {
+        font-size: 13px;
+    }
+
+    .market-owned {
+        font-size: 11px;
+        min-width: auto;
+    }
+
+    .market-row-2 {
+        padding-top: 6px;
+    }
+
+    .market-actions {
+        gap: 6px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .market-sell-btn {
+        padding: 8px 0;
+        font-size: 12px;
+        flex: 1;
+        text-align: center;
     }
 }

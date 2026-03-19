@@ -66,32 +66,47 @@ const GameConfig = {
 
 // 资源类型配置
 const ResourceTypes = {
+    credits: {
+        id: 'credits',
+        name: '星币',
+        icon: '💳',
+        color: 0xFFD700,
+        description: '星际通用货币，可用于购买建筑和升级'
+    },
     crystals: {
         id: 'crystals',
         name: '能量晶体',
         icon: '💎',
         color: 0x00D4FF,
-        baseClickValue: 1
+        baseClickValue: 1,
+        basePrice: 10,
+        description: '基础矿物，广泛分布于各星域'
     },
     rareOre: {
         id: 'rareOre',
         name: '稀有矿石',
         icon: '⛏️',
         color: 0xAA66FF,
-        unlockAt: 'deep'
+        unlockAt: 'deep',
+        basePrice: 50,
+        description: '深层矿物，价值较高'
     },
     starCore: {
         id: 'starCore',
         name: '星核碎片',
         icon: '⭐',
         color: 0xFFAA00,
-        unlockAt: 'orbit'
+        unlockAt: 'orbit',
+        basePrice: 200,
+        description: '恒星残骸，极为珍贵'
     },
     darkMatter: {
         id: 'darkMatter',
         name: '暗物质',
         icon: '🌌',
         color: 0x8800FF,
-        unlockAt: 'core'
+        unlockAt: 'core',
+        basePrice: 1000,
+        description: '宇宙中最神秘的物质'
     }
 };
