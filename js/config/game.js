@@ -1,7 +1,7 @@
 // 游戏全局配置
 const GameConfig = {
     // 游戏版本
-    version: '1.0.7',
+    version: '1.0.8',
     
     // 游戏循环频率 (每秒tick数)
     ticksPerSecond: 10,
